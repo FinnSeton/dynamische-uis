@@ -10,7 +10,7 @@ console.log(berekening)
 window.alert(berekening)
 alert(berekening)
 
-let antwoord = "Ik heb nog geen idee hoeveel verdiepingen er moeten komen :-( ";
-document.getElementById("antwoord").innerText = antwoord;
+//let antwoord = "Ik heb nog geen idee hoeveel verdiepingen er moeten komen :-( ";
+//document.getElementById("antwoord").innerText = antwoord;
 
 console.log("Om het gewenste aantal autos kwijt te kunnen heb ik x verdiepingen nodig.")
