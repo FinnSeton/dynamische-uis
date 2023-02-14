@@ -1,16 +1,11 @@
-let uitleg = "In een parkeergarage passen 80 auto's op de begane grond en 120 op een verdieping.\n"+
-"Vraag het gewenste aantal auto's in de garage en bereken het aantal verdiepingen wat je nodig hebt.";
-
-alert(uitleg);
-let gewenste_aantal_autos = prompt("Hoeveel autos wilt u kwijt in de parkeergarage?");
-
-let berekening = Math.ceil((gewenste_aantal_autos - 80) / 120);
-document.getElementById("berekening").innerText = berekening;
-console.log(berekening)
-window.alert(berekening)
-alert(berekening)
-
-//let antwoord = "Ik heb nog geen idee hoeveel verdiepingen er moeten komen :-( ";
-//document.getElementById("antwoord").innerText = antwoord;
-
-console.log("Om het gewenste aantal autos kwijt te kunnen heb ik x verdiepingen nodig.")
+let aantal = prompt("Welk cijfer wil je voor je cijferruit?");
+let list = "";
+for (let number = 1; number <= aantal; number++){
+    list += number;
+    document.getElementById("antwoord").innerText += list+ '\n';
+    list = number === parseInt(aantal) ? list += "" : list += "-";
+}
+for (let number = aantal; number >= 1; number--) {
+    list = list.replace(number, '').split("").reverse().join("").replace('-', '').split("").reverse().join("");
+    document.getElementById("antwoord").innerText += list + '\n';
+}
