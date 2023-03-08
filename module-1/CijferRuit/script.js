@@ -1,15 +1,22 @@
-const aantal = parseInt(prompt("Welk cijfer wil je voor je cijferruit?"));
-let htmlOutput = "";
+let aantal = Number(prompt('Hoeveel getallen wil je in de ruit?')) + 2;
+let ruit = '';
 
-let list = "";
-for (let i = 1; i <= aantal; i++) {
-  list += i;
-  htmlOutput += "<p>" + list.padStart(aantal - Math.floor((aantal - i) / 2), " ").padEnd(aantal, " ") + "</p>";
+for (let i = 0; i < aantal; i++) {
+  let getallen = [];
+  for (let j = 1; j < i; j++) {
+    getallen.push(j);
+  }
+  if (getallen.length > 0) {
+    ruit += getallen.join('-') + '\n';
+  }
 }
 
-for (let i = 1; i <= aantal; i--) {
-    list -= i;
-    htmlOutput += "<p>" + list.padStart(aantal - Math.floor((aantal - i) / 2), " ").padEnd(aantal, " ") + "</p>";
-  }
+let omgekeerderuit = ruit.split('\n');
+omgekeerderuit.pop(0)
+omgekeerderuit.pop(0)
+let x = omgekeerderuit.reverse().join('\n');
+ruit += x;
 
-document.getElementById("output").innerHTML = htmlOutput;
+const ruitTekst = document.createElement('pre');
+ruitTekst.innerText = ruit;
+document.body.appendChild(ruitTekst);
