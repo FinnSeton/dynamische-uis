@@ -4,7 +4,7 @@ let uitleg = "In een parkeergarage passen 80 auto's op de begane grond en 120 op
 alert(uitleg);
 let gewenste_aantal_autos = prompt("Hoeveel autos wilt u kwijt in de parkeergarage?");
 
-let berekening = Math.ceil((gewenste_aantal_autos - 80) / 120);
+let berekening = Math.ceil((gewenste_aantal_autos - 80) / 120 + 1);
 document.getElementById("berekening").innerText = berekening;
 console.log(berekening)
 window.alert(berekening)

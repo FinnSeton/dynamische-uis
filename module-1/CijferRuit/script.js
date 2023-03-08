@@ -1,11 +1,15 @@
-let aantal = prompt("Welk cijfer wil je voor je cijferruit?");
+const aantal = parseInt(prompt("Welk cijfer wil je voor je cijferruit?"));
+let htmlOutput = "";
+
 let list = "";
-for (let number = 1; number <= aantal; number++){
-    list += number;
-    document.getElementById("antwoord").innerText += list+ '\n';
-    list = number === parseInt(aantal) ? list += "" : list += "-";
+for (let i = 1; i <= aantal; i++) {
+  list += i;
+  htmlOutput += "<p>" + list.padStart(aantal - Math.floor((aantal - i) / 2), " ").padEnd(aantal, " ") + "</p>";
 }
-for (let number = aantal; number >= 1; number--) {
-    list = list.replace(number, '').split("").reverse().join("").replace('-', '').split("").reverse().join("");
-    document.getElementById("antwoord").innerText += list + '\n';
-}
+
+for (let i = 1; i <= aantal; i--) {
+    list -= i;
+    htmlOutput += "<p>" + list.padStart(aantal - Math.floor((aantal - i) / 2), " ").padEnd(aantal, " ") + "</p>";
+  }
+
+document.getElementById("output").innerHTML = htmlOutput;
