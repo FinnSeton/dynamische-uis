@@ -1,0 +1,13 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+
+#image {
+	height: 80px;
+	width: 80px;
+	transition: transform;
+	transition-duration: 70ms;
+	background: url('tank.png') 80px 0px;
+}
