@@ -25,7 +25,7 @@ function checkKey(e) {
 
     } else if (e.keyCode == '37') { // left arrow
     	console.log("left arrow");
-        image.style.transform = "rotate(-90deg)"
+        image.style.transform = "rotate(270deg)"
         image.style.backgroundPosition = `${wheelrotation = wheelrotation + 84}px 0px`; // check goed de rupsband
         image.style.marginLeft =  `${leftright = leftright - 10}px`;
     } else if (e.keyCode == '39') {   // right arrow
