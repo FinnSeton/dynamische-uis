@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Top-Secret-Stamp';
+    src: url(Top-Secret-Stamp.ttf);
+    }
+
+body { 
+    font-family: 'Top-Secret-Stamp';
+}
+
+button:hover {
+    background-color: red;
+}
+
+button {
+    background-color: blue;
+    width: 100px;
+    height: 100px;
+    color: white;
+}
+
