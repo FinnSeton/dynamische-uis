@@ -59,18 +59,12 @@ function cardmaker(cardname, count) {
                 selectedCardButton.disabled = true;
                 correspondingCardButton.disabled = true;
                 selectedCardButton.innerText = cardnameid.split(".")[0];
-                correspondingCardButton.innerText = cardnameid.split(".")[0];
-    
-                button.style.background = disabled;
-                var div = document.getElementById("cards");
-                div.appendChild(button);
-    
-    
+                correspondingCardButton.innerText = cardnameid.split(".")[0];   
                 selectedCardButtonold = null;
                 matchedCards += 2;
                 gueses++;
     
-                if (matchedCards === cardsnmbr.length) {
+                if (matchedCards == cardsnmbr.length) {
                     setTimeout(function () { alert("Goedgedaan! Je hebt gewonnen!\nJe hebt " + gueses + " geraden"); }, 500);
                 }
             } else {
