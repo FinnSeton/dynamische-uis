@@ -2,8 +2,9 @@ var hvlkaarten = 10;
 var usdcards = [];
 var cardsnmbr = [];
 var selectedCardButton;
-var cardnameid;
 var selectedCardButtonold;
+var matchedCards = 0;
+var gueses = 0;
 
 for (var i = 1; i <= hvlkaarten; i++) {
     cardsnmbr.push(i);
@@ -31,36 +32,38 @@ function shuffle(array) {
 function clickcard(cardnameid) {
     selectedCardButton = document.getElementById(cardnameid + "btn");
 
-    if (selectedCardButton.innerText !== "" || selectedCardButton.disabled) {
+    if (selectedCardButton.disabled) {
         return;
     }
 
-    if (selectedCardButtonold) {
-        selectedCardButtonold.innerText = "";
-    }
-
-    selectedCardButton.innerText = cardnameid;
-    console.log(selectedCardButton.innerText);
+    selectedCardButton.innerText = cardnameid.split(".")[0];
 
     if (selectedCardButtonold && selectedCardButtonold !== selectedCardButton) {
-        var correspondingCardId = selectedCardButtonold.id.replace(".1", ".2");
-        var correspondingCardButton = document.getElementById(correspondingCardId);
+        var correspondingCardId = cardnameid.includes(".1") ? cardnameid.replace(".1", ".2") : cardnameid.replace(".2", ".1");
+        var correspondingCardButton = document.getElementById(correspondingCardId + "btn");
 
-        if (correspondingCardButton.innerText === cardnameid) {
-            selectedCardButtonold.disabled = true;
+        if (selectedCardButtonold.innerText === correspondingCardButton.innerText) {
             selectedCardButton.disabled = true;
             correspondingCardButton.disabled = true;
-        } else if(correspondingCardButton.innerText !== cardnameid) {
+            selectedCardButton.innerText = cardnameid.split(".")[0];
+            correspondingCardButton.innerText = cardnameid.split(".")[0];
+            selectedCardButtonold = null;
+            matchedCards += 2;
+            gueses++;
+
+            if (matchedCards === cardsnmbr.length) {
+                setTimeout(function () {alert("Goedgedaan! Je hebt gewonnen!\nJe hebt " + gueses + " geraden");}, 500);
+            }
+        } else {
             setTimeout(function () {
+                gueses++;
                 selectedCardButton.innerText = "";
                 correspondingCardButton.innerText = "";
+                selectedCardButtonold.innerText = "";
+                selectedCardButtonold = null;
             }, 500);
         }
-
-        selectedCardButtonold = null;
-    } else {
-        selectedCardButtonold = selectedCardButton;
-    }
+    } else {selectedCardButtonold = selectedCardButton;}
 }
 
 var countMap = [];
@@ -77,24 +80,10 @@ function cardmaker(cardname, count) {
     }
 
     const button = document.createElement('button');
-    button.onclick = function () {
-        clickcard(cardnameid);
-    };
+    button.onclick = function () {clickcard(cardnameid);};
     button.id = cardnameid + "btn";
     button.style.width = "130px";
     button.style.height = "200px";
     var div = document.getElementById("cards");
-
     div.appendChild(button);
 }
-
-const unselectButton = document.createElement('button');
-unselectButton.onclick = function () {
-    if (selectedCardButtonold) {
-        selectedCardButtonold.innerText = "";
-        selectedCardButtonold = null;
-    }
-};
-unselectButton.innerText = "Unselect";
-var div = document.getElementById("cards");
-div.appendChild(unselectButton);
