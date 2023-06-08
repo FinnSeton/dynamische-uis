@@ -29,42 +29,6 @@ function shuffle(array) {
     return array;
 }
 
-function clickcard(cardnameid) {
-    selectedCardButton = document.getElementById(cardnameid + "btn");
-
-    if (selectedCardButton.disabled) {
-        return;
-    }
-
-    selectedCardButton.innerText = cardnameid.split(".")[0];
-
-    if (selectedCardButtonold && selectedCardButtonold !== selectedCardButton) {
-        var correspondingCardId = cardnameid.includes(".1") ? cardnameid.replace(".1", ".2") : cardnameid.replace(".2", ".1");
-        var correspondingCardButton = document.getElementById(correspondingCardId + "btn");
-
-        if (selectedCardButtonold.innerText === correspondingCardButton.innerText) {
-            selectedCardButton.disabled = true;
-            correspondingCardButton.disabled = true;
-            selectedCardButton.innerText = cardnameid.split(".")[0];
-            correspondingCardButton.innerText = cardnameid.split(".")[0];
-            selectedCardButtonold = null;
-            matchedCards += 2;
-            gueses++;
-
-            if (matchedCards === cardsnmbr.length) {
-                setTimeout(function () {alert("Goedgedaan! Je hebt gewonnen!\nJe hebt " + gueses + " geraden");}, 500);
-            }
-        } else {
-            setTimeout(function () {
-                gueses++;
-                selectedCardButton.innerText = "";
-                correspondingCardButton.innerText = "";
-                selectedCardButtonold.innerText = "";
-                selectedCardButtonold = null;
-            }, 500);
-        }
-    } else {selectedCardButtonold = selectedCardButton;}
-}
 
 var countMap = [];
 cardsnmbr.forEach((element) => {
@@ -73,17 +37,70 @@ cardsnmbr.forEach((element) => {
 });
 
 function cardmaker(cardname, count) {
-    if (count > 1) {
-        var cardnameid = cardname + ".2";
-    } else {
-        var cardnameid = cardname + ".1";
+    if (count > 1) { var cardnameid = cardname + ".2"; }
+    else { var cardnameid = cardname + ".1"; }
+
+    function clickcard(cardnameid) {
+        selectedCardButton = document.getElementById(cardnameid + "btn");
+    
+        if (selectedCardButton.disabled) {
+            return;
+        }
+    
+        selectedCardButton.innerText = cardnameid.split(".")[0];
+        selectedCardButton.style.backgroundImage = "none"; // Remove the background image
+        selectedCardButton.style.backgroundColor = "white"; // Set background color to white
+    
+        if (selectedCardButtonold && selectedCardButtonold !== selectedCardButton) {
+            var correspondingCardId = cardnameid.includes(".1") ? cardnameid.replace(".1", ".2") : cardnameid.replace(".2", ".1");
+            var correspondingCardButton = document.getElementById(correspondingCardId + "btn");
+    
+            if (selectedCardButtonold.innerText === correspondingCardButton.innerText) {
+                selectedCardButton.disabled = true;
+                correspondingCardButton.disabled = true;
+                selectedCardButton.innerText = cardnameid.split(".")[0];
+                correspondingCardButton.innerText = cardnameid.split(".")[0];
+    
+                button.style.background = disabled;
+                var div = document.getElementById("cards");
+                div.appendChild(button);
+    
+    
+                selectedCardButtonold = null;
+                matchedCards += 2;
+                gueses++;
+    
+                if (matchedCards === cardsnmbr.length) {
+                    setTimeout(function () { alert("Goedgedaan! Je hebt gewonnen!\nJe hebt " + gueses + " geraden"); }, 500);
+                }
+            } else {
+                setTimeout(function () {
+                    gueses++;
+                    selectedCardButton.innerText = "";
+                    correspondingCardButton.innerText = "";
+                    selectedCardButtonold.innerText = "";
+                    selectedCardButtonold.style.backgroundImage = "url('img/GetImage.png')";
+                    selectedCardButton.style.backgroundImage = "url('img/GetImage.png')"; // Restore the background image
+                    selectedCardButtonold.style.backgroundColor = ""; // Reset background color
+                    selectedCardButtonold = null;
+                }, 500);
+            }
+        } else {
+            selectedCardButtonold = selectedCardButton;
+        }
     }
+    
+    
+
 
     const button = document.createElement('button');
-    button.onclick = function () {clickcard(cardnameid);};
+    button.onclick = function () { clickcard(cardnameid); };
     button.id = cardnameid + "btn";
     button.style.width = "130px";
     button.style.height = "200px";
+    button.style.backgroundImage = "url('img/GetImage.png')";
+    button.style.backgroundRepeat = "no-repeat";
+    button.style.backgroundSize = "cover";
     var div = document.getElementById("cards");
     div.appendChild(button);
 }
